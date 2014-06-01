@@ -1,5 +1,6 @@
 angular.module('pjcWordMultiSearch.search', [
    'ngRoute',
+   'ngCookies',
    'ui.bootstrap',
 ])
 
@@ -11,7 +12,7 @@ angular.module('pjcWordMultiSearch.search', [
    });
 })
 
-.controller('SearchPageController', function ($scope, $sce) {
+.controller('SearchPageController', function ($scope, $sce, $cookies) {
 
     var getRhinoSpikeLink = function(lang, search) {
       var langCode = {'eng': '1', 'epo': '22', 'fra': '6', 'spa': '2'};
@@ -110,7 +111,13 @@ angular.module('pjcWordMultiSearch.search', [
         $scope.tabs = getTabs($scope.language, $scope.searchtext);
     };
 
-    $scope.language='spa';
+    $scope.setLastLang = function() {
+      $cookies.lastlang=$scope.language;
+    };
+
+    var lastlang='spa';
+    if ($cookies.lastlang) lastlang=$cookies.lastlang;
+    $scope.language=lastlang;
     $scope.searchtext='';
 
 })
