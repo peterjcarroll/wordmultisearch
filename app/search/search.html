@@ -1,0 +1,26 @@
+<div class="row">
+    <form role="form" ng-submit="search()">
+        <div class="form-group">
+            <label for="searchBox">Word</label>
+            <input type="text" class="form-control" id="searchBox" placeholder="Enter a word to search for" ng-model="searchtext">
+        </div>
+        <div class="form-group">
+            <label for="language">Language</label>
+            <select class="form-control" id="language" ng-model="language">
+                <option value="eng">English</option>
+                <option value="spa" selected="selected">Español</option>
+                <option value="epo">Esperanto</option>
+            </select>
+        </div>
+        <input type="submit" ng-disabled="searchtext==''" class="btn btn-primary" value="Search">
+    </form> 
+</div>
+<div class="row">
+    <tabset>
+        <tab ng-repeat="tab in tabs" heading="{{tab.name}}" active="tab.active" disabled="tab.disabled">
+            <div style="position:relative; overflow:hidden; padding-top:0; padding-bottom:100%">
+                <iframe ng-src="{{ tab.href }}" frameborder="0" style="position:absolute;top:0;left:0;width:100%;height:100%;"></iframe>
+            </div>
+        </tab>
+    </tabset>
+</div>

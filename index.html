@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:ng="http://angularjs.org" id="ng-app" ng-app="pjcWordMultiSearch">
+<head>
+   <meta charset="utf-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+
+   <title>Word Multi Search by Peter J Carroll</title>
+
+   <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+   <link href="vendor/bootstrap/css/bootstrap-theme.min.css" rel="stylesheet" />
+
+   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+   <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+   <!--[if lte IE 7]>
+      <script src="vendor/json3/json3.min.js"></script>
+   <![endif]-->
+
+</head>
+
+<body>
+  <div class="navbar navbar-inverse">
+      <div class="navbar-header">
+          <div class="container">
+              <a class="navbar-brand" href="#/">
+                  Word Multi Search
+              </a>
+          </div>
+      </div>
+      <ul class="nav navbar-nav">
+        <li><a href="#/about">About</a></li>
+      </ul>
+  </div>
+
+ <div ng-view class="container"></div>
+
+ <!-- 3rd party scripts -->
+ <script src="vendor/angular/angular.js"></script>
+ <script src="vendor/angular/angular-route.min.js"></script>
+ <script src="vendor/jquery/jquery.min.js"></script>
+ <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+ <script src="vendor/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+
+ <!-- app scripts -->
+ <script src="app/app.js"></script>
+ <script src="app/search/search.js"></script>
+ <script src="app/about/about.js"></script>
+</body>
+
+</html>
