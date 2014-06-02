@@ -1,23 +1,27 @@
 <div class="row">
     <form role="form" ng-submit="search()">
         <div class="form-group">
-            <label for="searchBox">Word</label>
-            <input type="text" class="form-control" id="searchBox" placeholder="Enter a word to search for" ng-model="searchtext">
+            <div class="col-md-4">
+                <input type="text" class="form-control" id="searchBox" placeholder="Enter a word to search for" ng-model="searchtext">
+            </div>
+            <div class="col-md-3">
+                <select class="form-control" id="language" ng-model="language" ng-change="setLastLang()">
+                    <option value="deu">Deutsch</option>
+                    <option value="eng">English</option>
+                    <option value="spa" selected="selected">Español</option>
+                    <option value="epo">Esperanto</option>
+                    <option value="fra">Français</option>
+                    <option value="jpn">日本語 (Japanese)</option>
+                    <option value="cmn">中文 (Mandarin Chinese)</option>
+                </select>       
+            </div>
+            <div class="col-md-3">
+                <small>Don't see your language? <a href="https://github.com/peterjcarroll/wordmultisearch/issues/1">Request it here</a></small>
+            </div>
+            <div class="col-md-2">
+                <input type="submit" ng-disabled="searchtext==''" class="btn btn-primary" id="searchBtn" value="Search">
+            </div>
         </div>
-        <div class="form-group">
-            <label for="language">Language</label>
-            <select class="form-control" id="language" ng-model="language" ng-change="setLastLang()">
-                <option value="deu">Deutsch</option>
-                <option value="eng">English</option>
-                <option value="spa" selected="selected">Español</option>
-                <option value="epo">Esperanto</option>
-                <option value="fra">Français</option>
-                <option value="jpn">日本語 (Japanese)</option>
-                <option value="cmn">中文 (Mandarin Chinese)</option>
-            </select>
-            <p>Don't see your language? <a href="https://github.com/peterjcarroll/wordmultisearch/issues/1">Request it here</a></p>
-        </div>
-        <input type="submit" ng-disabled="searchtext==''" class="btn btn-primary" value="Search">
     </form> 
 </div>
 <div class="row">
