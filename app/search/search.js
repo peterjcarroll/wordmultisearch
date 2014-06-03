@@ -12,7 +12,7 @@ angular.module('pjcWordMultiSearch.search', [
    });
 })
 
-.controller('SearchPageController', function ($scope, $sce, $cookies) {
+.controller('SearchPageController', function ($scope, $sce, $cookies, $anchorScroll, $location) {
 
     var getRhinoSpikeLink = function(lang, search) {
       var langCode = {'cmn': '13', 'deu': '3', 'eng': '1', 'epo': '22', 'fra': '6', 'jpn': '4', 'spa': '2'};
@@ -116,6 +116,8 @@ angular.module('pjcWordMultiSearch.search', [
 
     $scope.search = function() {
         $scope.tabs = getTabs($scope.language, $scope.searchtext);
+        $location.hash('searchResults');
+        $anchorScroll();
     };
 
     $scope.setLastLang = function() {
