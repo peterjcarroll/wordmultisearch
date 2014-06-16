@@ -124,10 +124,35 @@ angular.module('pjcWordMultiSearch.search', [
       $cookies.lastlang=$scope.language;
     };
 
+    $scope.languages = [
+      { code: 'cmn', name:'中文 (Mandarin Chinese)'},
+      { code: 'deu', name:'Deutsch'},
+      { code: 'eng', name:'English'},
+      { code: 'epo', name:'Esperanto'},
+      { code: 'fra', name:'Français'},
+      { code: 'jpn', name:'日本語 (Japanese)'},
+      { code: 'spa', name:'Español'},
+    ];
+
+    $scope.findLanguage = function(lang_code) {
+      lang = null;
+      angular.forEach($scope.languages, function(value, key) {
+        if(value.code == lang_code) lang = value;
+      });        
+      
+      return lang;
+    };
+
+    $scope.setNativeLang = function(lang) {
+      $scope.nativelang = $scope.findLanguage(lang);      
+    };
+
+    //initialization
     var lastlang='spa';
     if ($cookies.lastlang) lastlang=$cookies.lastlang;
     $scope.language=lastlang;
     $scope.searchtext='';
-
+    $scope.isCollapsed = false;
+    if(!$scope.nativelang) $scope.setNativeLang('eng');
 })
 ;

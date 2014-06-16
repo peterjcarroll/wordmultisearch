@@ -19,10 +19,27 @@
                 <small>Don't see your language? <a href="https://github.com/peterjcarroll/wordmultisearch/issues/1">Request it here</a></small>
             </div>
             <div class="col-md-2">
-                <input type="submit" ng-disabled="searchtext==''" class="btn btn-primary" id="searchBtn" value="Search">
+                <input type="submit" ng-disabled="searchtext==''" ng-click="isCollapsed = !isCollapsed" class="btn btn-primary" id="searchBtn" value="Search">
             </div>
         </div>
     </form> 
+</div>
+<div id="settings" class="row" collapse="isCollapsed">
+    <h3>Search settings</h3>
+    <div class="well">
+        <label for="nativelang">Your native language:</label>
+        <div class="btn-group" dropdown>
+            <button type="button" class="btn dropdown-toggle">{{ nativelang.name }} <span class="caret"></span></button>
+            <ul class="dropdown-menu" role="menu">
+                <li ng-repeat="lang in languages"><a href="#" ng-click="setNativeLang(lang.code)">{{lang.name}}</a></li>
+            </ul>
+        </div>
+        <div class="checkbox">
+            <label>
+                <input type="checkbox" ng-model="googlenewtabs">Open Google pages in new tabs</input>
+            </label>
+        </div>
+    </div>
 </div>
 <a id="searchResults"></a>
 <div class="row">
