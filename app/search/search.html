@@ -2,7 +2,7 @@
     <form role="form" ng-submit="search()">
         <div class="form-group">
             <div class="col-md-4">
-                <input type="text" class="form-control" id="searchBox" placeholder="Enter a word to search for" ng-model="searchtext" ng-keyup="$event.keyCode == 13 ? myFunc() : null">
+                <input type="text" class="form-control" id="searchBox" placeholder="Enter a word to search for" ng-model="searchtext" ng-keyup="$event.keyCode == 13 ? search() : null">
             </div>
             <div class="col-md-3">
                 <select class="form-control" id="language" ng-model="language" ng-change="setLastLang()">
