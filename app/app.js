@@ -1,6 +1,5 @@
 var app = angular.module('pjcWordMultiSearch', [
    'ngRoute',
-   'ui.bootstrap',
    'pjcWordMultiSearch.search',
    'pjcWordMultiSearch.about'
 ]);

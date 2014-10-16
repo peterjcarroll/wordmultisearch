@@ -1,7 +1,7 @@
 angular.module('pjcWordMultiSearch.search', [
    'ngRoute',
    'ngCookies',
-   'ui.bootstrap',
+   'mgcrea.ngStrap',
 ])
 
 .config(function ($routeProvider) {
@@ -103,7 +103,7 @@ angular.module('pjcWordMultiSearch.search', [
 
     var getTabs = function(lang, search) {
       var tabs = [];
-      if (isSupported('monodict', lang)) tabs.push({ name: 'Monolingual Dictionary', active: true, href:getMonoDictionaryLink(lang, search)});
+      if (isSupported('monodict', lang)) tabs.push({ name: 'Monolingual Dictionary', href:getMonoDictionaryLink(lang, search)});
       if (isSupported('transdict', lang)) tabs.push({ name: 'Translation Dictionary', href:getTranslationDictionaryLink(lang, search)});
       if (isSupported('googleimages', lang)) tabs.push({ name: 'Google Images', href:getGoogleImagesLink(lang, search)});
       if (isSupported('googletranslate', lang)) tabs.push({ name: 'Google Translate', href:getGoogleTranslateLink(lang, search)});
@@ -116,8 +116,6 @@ angular.module('pjcWordMultiSearch.search', [
 
     $scope.search = function() {
         $scope.tabs = getTabs($scope.language, $scope.searchtext);
-        $location.hash('searchResults');
-        $anchorScroll();
     };
 
     $scope.setLastLang = function() {

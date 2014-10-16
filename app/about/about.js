@@ -1,6 +1,5 @@
 angular.module('pjcWordMultiSearch.about', [
    'ngRoute',
-   'ui.bootstrap',
 ])
 
 .config(function ($routeProvider) {
