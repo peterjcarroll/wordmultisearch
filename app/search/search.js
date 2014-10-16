@@ -1,7 +1,7 @@
 angular.module('pjcWordMultiSearch.search', [
    'ngRoute',
    'ngCookies',
-   'mgcrea.ngStrap',
+   'ui.bootstrap',
 ])
 
 .config(function ($routeProvider) {
@@ -46,7 +46,8 @@ angular.module('pjcWordMultiSearch.search', [
 
     var getGoogleImagesLink = function(lang, search) {
       var langCode = {'cmn': 'com.hk', 'deu': 'de',  'eng': 'com', 'fra': 'fr', 'jpn': 'jp', 'spa': 'es'};
-      var url = 'ba-simple-proxy.php?mode=native&send_cookies=0&url=https%3A%2F%2Fwww.google.{lang}%2Fsearch%3Fq%3D{search}%26tbm%3Disch%26sout%3D1%26biw%3D1266%26bih%3D1442%26dpr%3D1'
+      //var url = 'ba-simple-proxy.php?mode=native&send_cookies=0&url=https%3A%2F%2Fwww.google.{lang}%2Fsearch%3Fq%3D{search}%26tbm%3Disch%26sout%3D1%26biw%3D1266%26bih%3D1442%26dpr%3D1'
+      var url = 'https://www.google.{lang}/search?q={search}&tbm=isch&sout=1&biw=1266&bih=1442&dpr=1'
         .replace('{search}', encodeURIComponent(search))
         .replace('{lang}', langCode[lang]);
       return $sce.trustAsResourceUrl(url);
@@ -54,7 +55,8 @@ angular.module('pjcWordMultiSearch.search', [
 
     var getGoogleTranslateLink = function(lang, search) {
       var langCode = {'cmn': 'zh-CN', 'deu': 'de', 'epo': 'eo', 'fra': 'fr', 'jpn': 'ja', 'spa': 'es'};
-      var url = 'ba-simple-proxy.php?mode=native&send_cookies=0&url=http%3A%2F%2Ftranslate.google.com%2F%3Fie%3DUTF-8%26sl%3D{lang}%26tl%3Den%26text%3D{search}'
+      //var url = 'ba-simple-proxy.php?mode=native&send_cookies=0&url=http%3A%2F%2Ftranslate.google.com%2F%3Fie%3DUTF-8%26sl%3D{lang}%26tl%3Den%26text%3D{search}'
+      var url = 'http://translate.google.com/?ie=UTF-8&sl={lang}&tl=en&text={search}'
         .replace('{search}', encodeURIComponent(search))
         .replace('{lang}', langCode[lang]);
       return $sce.trustAsResourceUrl(url);
@@ -103,19 +105,19 @@ angular.module('pjcWordMultiSearch.search', [
 
     var getTabs = function(lang, search) {
       var tabs = [];
-      if (isSupported('monodict', lang)) tabs.push({ name: 'Monolingual Dictionary', href:getMonoDictionaryLink(lang, search)});
-      if (isSupported('transdict', lang)) tabs.push({ name: 'Translation Dictionary', href:getTranslationDictionaryLink(lang, search)});
-      if (isSupported('googleimages', lang)) tabs.push({ name: 'Google Images', href:getGoogleImagesLink(lang, search)});
-      if (isSupported('googletranslate', lang)) tabs.push({ name: 'Google Translate', href:getGoogleTranslateLink(lang, search)});
-      if (isSupported('tatoeba', lang)) tabs.push({ name: 'Tatoeba', href:getTatoebaLink(lang, search)});
-      if (isSupported('linguee', lang)) tabs.push({ name: 'Linguee', href:getLingueeLink(lang, search)});
-      if (isSupported('rhinospike', lang)) tabs.push({ name: 'RhinoSpike', href:getRhinoSpikeLink(lang, search)});
-      if (isSupported('forvo', lang)) tabs.push({ name: 'Forvo', href:getForvoLink(lang, search)});
+      if (isSupported('monodict', lang)) tabs.push({ name: 'Monolingual Dictionary', active: true, href:getMonoDictionaryLink(lang, search), newtab:false});
+      if (isSupported('transdict', lang)) tabs.push({ name: 'Translation Dictionary', href:getTranslationDictionaryLink(lang, search), newtab:false});
+      if (isSupported('googleimages', lang)) tabs.push({ name: 'Google Images', href:getGoogleImagesLink(lang, search), newtab:true});
+      if (isSupported('googletranslate', lang)) tabs.push({ name: 'Google Translate', href:getGoogleTranslateLink(lang, search), newtab:true});
+      if (isSupported('tatoeba', lang)) tabs.push({ name: 'Tatoeba', href:getTatoebaLink(lang, search), newtab:false});
+      if (isSupported('linguee', lang)) tabs.push({ name: 'Linguee', href:getLingueeLink(lang, search), newtab:false});
+      if (isSupported('rhinospike', lang)) tabs.push({ name: 'RhinoSpike', href:getRhinoSpikeLink(lang, search), newtab:false});
+      if (isSupported('forvo', lang)) tabs.push({ name: 'Forvo', href:getForvoLink(lang, search), newtab:false});
       return tabs;
     };
 
     $scope.search = function() {
-        $scope.tabs = getTabs($scope.language, $scope.searchtext);
+      $scope.tabs = getTabs($scope.language, $scope.searchtext);                
     };
 
     $scope.setLastLang = function() {
@@ -143,6 +145,10 @@ angular.module('pjcWordMultiSearch.search', [
 
     $scope.setNativeLang = function(lang) {
       $scope.nativelang = $scope.findLanguage(lang);      
+    };
+
+    $scope.onTabChange = function(tab) {
+      if(tab.newtab) window.open(tab.href);
     };
 
     //initialization

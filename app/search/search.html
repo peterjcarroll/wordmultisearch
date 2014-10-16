@@ -34,20 +34,18 @@
                 <li ng-repeat="lang in languages"><a href="#" ng-click="setNativeLang(lang.code)">{{lang.name}}</a></li>
             </ul>
         </div>
-        <div class="checkbox">
-            <label>
-                <input type="checkbox" ng-model="googlenewtabs">Open Google pages in new tabs</input>
-            </label>
-        </div>
     </div>
 </div>
 <a id="searchResults"></a>
 <div class="row">
-    <div bs-tabs>
-        <div ng-repeat="tab in tabs" title="{{ tab.name }}" bs-pane>
-            <div style="position:relative; overflow:hidden; padding-top:0; padding-bottom:100%">
+    <tabset>
+        <tab ng-repeat="tab in tabs" heading="{{tab.name}}" select="onTabChange(tab)" active="tab.active" disabled="tab.disabled">
+            <div ng-hide="tab.newtab" style="position:relative; overflow:hidden; padding-top:0; padding-bottom:100%">
                 <iframe ng-src="{{ tab.href }}" frameborder="0" style="position:absolute;top:0;left:0;width:100%;height:100%;"></iframe>
             </div>
-        </div>
-    </div>
+            <div ng-show="tab.newtab">
+                <p>{{ tab.name }} will appear in a new tab or window.</p>
+            </div>
+        </tab>
+    </tabset>
 </div>
