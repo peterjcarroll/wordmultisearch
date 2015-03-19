@@ -12,7 +12,7 @@ angular.module('pjcWordMultiSearch.search', [
    });
 })
 
-.controller('SearchPageController', function ($scope, $sce, $cookies, $anchorScroll, $location) {
+.controller('SearchPageController', function ($scope, $sce, $cookies, $anchorScroll, $location, $window) {
 
     var getRhinoSpikeLink = function(lang, search) {
       var langCode = {'cmn': '13', 'deu': '3', 'eng': '1', 'epo': '22', 'fra': '6', 'jpn': '4', 'spa': '2'};
@@ -66,7 +66,7 @@ angular.module('pjcWordMultiSearch.search', [
       var url = '';
       switch(lang){
         case 'cmn': url='http://www.mdbg.net/chindict/chindict.php?page=worddict&wdrst=0&wdqb=' + encodeURIComponent(search); break;
-        case 'deu': url='http://www.wordreference.com/deen/' + encodeURIComponent(search); break;
+        case 'deu': url='http://dict.leo.org/#/search=' + encodeURIComponent(search); break;
         case 'epo': url='http://lernu.net/cgi-bin/serchi.pl?delingvo=eo&allingvo=en&modelo=' + encodeURIComponent(search); break;
         case 'fra': url='http://www.wordreference.com/fren/' + encodeURIComponent(search); break;
         case 'jpn': url='http://jisho.org/words?eng=&dict=edict&jap=' + encodeURIComponent(search); break;
@@ -148,7 +148,7 @@ angular.module('pjcWordMultiSearch.search', [
     };
 
     $scope.onTabChange = function(tab) {
-      if(tab.newtab) window.open(tab.href);
+      if(tab.newtab) $window.open(tab.href, "wmspopup");
     };
 
     //initialization
