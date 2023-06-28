@@ -15,7 +15,7 @@ angular.module('pjcWordMultiSearch.search', [
 .controller('SearchPageController', function ($scope, $sce, $cookies, $anchorScroll, $location, $window) {
 
     var getRhinoSpikeLink = function(lang, search) {
-      var langCode = {'cmn': '13', 'deu': '3', 'eng': '1', 'epo': '22', 'fra': '6', 'jpn': '4', 'pol': '7', 'ron': '21', 'spa': '2'};
+      var langCode = {'cmn': '13', 'deu': '3', 'eng': '1', 'epo': '22', 'fra': '6', 'jpn': '4', 'pol': '7', 'ron': '21', 'spa': '2', 'hin': '52'};
       var url = 'https://rhinospike.com/search/?language={lang}&q={search}'
         .replace('{search}', encodeURIComponent(search))
         .replace('{lang}', langCode[lang]);      
@@ -23,7 +23,7 @@ angular.module('pjcWordMultiSearch.search', [
     };
 
     var getForvoLink = function(lang, search) {
-      var langCode = {'cmn': 'zh', 'deu': 'de', 'eng': 'en', 'epo': 'eo', 'fra': 'fr', 'jpn': 'ja', 'pol': 'pl', 'ron': 'ro', 'spa': 'es'};
+      var langCode = {'cmn': 'zh', 'deu': 'de', 'eng': 'en', 'epo': 'eo', 'fra': 'fr', 'jpn': 'ja', 'pol': 'pl', 'ron': 'ro', 'spa': 'es', 'hin': 'hi'};
       var url = 'http://www.forvo.com/search-{lang}/{search}/'
         .replace('{search}', encodeURIComponent(search))
         .replace('{lang}', langCode[lang]);
@@ -46,7 +46,7 @@ angular.module('pjcWordMultiSearch.search', [
     };
 
     var getGoogleImagesLink = function(lang, search) {
-      var langCode = {'cmn': 'com.hk', 'deu': 'de',  'eng': 'com', 'fra': 'fr', 'jpn': 'jp', 'pol': 'pl', 'ron': 'ro', 'spa': 'es'};
+      var langCode = {'cmn': 'com.hk', 'deu': 'de',  'eng': 'com', 'fra': 'fr', 'jpn': 'jp', 'pol': 'pl', 'ron': 'ro', 'spa': 'es', 'hin': 'co.in'};
       //var url = 'ba-simple-proxy.php?mode=native&send_cookies=0&url=https%3A%2F%2Fwww.google.{lang}%2Fsearch%3Fq%3D{search}%26tbm%3Disch%26sout%3D1%26biw%3D1266%26bih%3D1442%26dpr%3D1'
       var url = 'https://www.google.{lang}/search?q={search}&tbm=isch&sout=1&biw=1266&bih=1442&dpr=1'
         .replace('{search}', encodeURIComponent(search))
@@ -55,7 +55,7 @@ angular.module('pjcWordMultiSearch.search', [
     };
 
     var getGoogleTranslateLink = function(lang, search) {
-      var langCode = {'cmn': 'zh-CN', 'deu': 'de', 'epo': 'eo', 'fra': 'fr', 'jpn': 'ja', 'pol': 'pl', 'ron': 'ro', 'spa': 'es'};
+      var langCode = {'cmn': 'zh-CN', 'deu': 'de', 'epo': 'eo', 'fra': 'fr', 'jpn': 'ja', 'pol': 'pl', 'ron': 'ro', 'spa': 'es', 'hin': 'hi'};
       //var url = 'ba-simple-proxy.php?mode=native&send_cookies=0&url=http%3A%2F%2Ftranslate.google.com%2F%3Fie%3DUTF-8%26sl%3D{lang}%26tl%3Den%26text%3D{search}'
       var url = 'http://translate.google.com/?ie=UTF-8&sl={lang}&tl=en&text={search}'
         .replace('{search}', encodeURIComponent(search))
@@ -74,6 +74,7 @@ angular.module('pjcWordMultiSearch.search', [
         case 'pol': url='http://portalwiedzy.onet.pl/tlumacz.html?qs={search}&tr=ang-auto&x=0&y=0'.replace('{search}', encodeURIComponent(search)); break;
         case 'ron': url='http://www.dictionarromanenglez.ro/en/?cuvant=' + encodeURIComponent(search); break;
         case 'spa': url='http://www.wordreference.com/es/en/translation.asp?spen=' + encodeURIComponent(search); break;
+        case 'hin': url='https://en.wiktionary.org/wiki/' + encodeURIComponent(search); break;
       }
       return $sce.trustAsResourceUrl(url);
     };
@@ -90,20 +91,21 @@ angular.module('pjcWordMultiSearch.search', [
         case 'pol': url='http://sjp.pwn.pl/szukaj/{search}.html'.replace('{search}', encodeURIComponent(search)); break;
         case 'ron': url='http://dexonline.ro/definitie/' + encodeURIComponent(search); break;
         case 'spa': url='http://www.wordreference.com/definicion/' + encodeURIComponent(search); break;
+        case 'hin': url='https://hi.wiktionary.org/wiki/' + encodeURIComponent(search); break;
       }
       return $sce.trustAsResourceUrl(url);
     };
 
     var isSupported = function(tab, lang){
       var langSupport = {
-        'rhinospike': 'cmn deu eng epo fra jpn pol ron spa',
-        'forvo': 'cmn deu eng epo fra jpn pol ron spa',
-        'tatoeba': 'cmn deu eng epo fra jp pol ron spa',
+        'rhinospike': 'cmn deu eng epo fra jpn pol ron spa hin',
+        'forvo': 'cmn deu eng epo fra jpn pol ron spa hin',
+        'tatoeba': 'cmn deu eng epo fra jp pol ron spa hin',
         'linguee': 'cmn deu fra jpn pol ron spa',
-        'googleimages': 'cmn deu eng fra jpn pol ron spa',
-        'googletranslate': 'cmn deu epo fra jpn pol ron spa',
-        'transdict': 'cmn deu epo fra jpn pol ron spa',
-        'monodict': 'cmn deu eng epo fra jpn pol ron spa' 
+        'googleimages': 'cmn deu eng fra jpn pol ron spa, hin',
+        'googletranslate': 'cmn deu epo fra jpn pol ron spa hin',
+        'transdict': 'cmn deu epo fra jpn pol ron spa hin',
+        'monodict': 'cmn deu eng epo fra jpn pol ron spa hin' 
       };
       return langSupport[tab].indexOf(lang) > -1;
     }
@@ -114,7 +116,7 @@ angular.module('pjcWordMultiSearch.search', [
       if (isSupported('transdict', lang)) tabs.push({ name: 'Translation Dictionary', href:getTranslationDictionaryLink(lang, search), newtab:false});
       if (isSupported('googleimages', lang)) tabs.push({ name: 'Google Images', href:getGoogleImagesLink(lang, search), newtab:true});
       if (isSupported('googletranslate', lang)) tabs.push({ name: 'Google Translate', href:getGoogleTranslateLink(lang, search), newtab:true});
-      if (isSupported('tatoeba', lang)) tabs.push({ name: 'Tatoeba', href:getTatoebaLink(lang, search), newtab:false});
+      if (isSupported('tatoeba', lang)) tabs.push({ name: 'Tatoeba', href:getTatoebaLink(lang, search), newtab:true});
       if (isSupported('linguee', lang)) tabs.push({ name: 'Linguee', href:getLingueeLink(lang, search), newtab:false});
       if (isSupported('rhinospike', lang)) tabs.push({ name: 'RhinoSpike', href:getRhinoSpikeLink(lang, search), newtab:false});
       if (isSupported('forvo', lang)) tabs.push({ name: 'Forvo', href:getForvoLink(lang, search), newtab:false});
@@ -139,6 +141,7 @@ angular.module('pjcWordMultiSearch.search', [
       { code: 'pol', name:'Polski'},
       { code: 'ron', name:'Română'},
       { code: 'spa', name:'Español'},
+      { code: 'hin', name:'हिंदी'},
     ];
 
     $scope.findLanguage = function(lang_code) {
