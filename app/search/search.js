@@ -118,8 +118,8 @@ angular.module('pjcWordMultiSearch.search', [
       if (isSupported('googletranslate', lang)) tabs.push({ name: 'Google Translate', href:getGoogleTranslateLink(lang, search), newtab:true});
       if (isSupported('tatoeba', lang)) tabs.push({ name: 'Tatoeba', href:getTatoebaLink(lang, search), newtab:true});
       if (isSupported('linguee', lang)) tabs.push({ name: 'Linguee', href:getLingueeLink(lang, search), newtab:false});
-      if (isSupported('rhinospike', lang)) tabs.push({ name: 'RhinoSpike', href:getRhinoSpikeLink(lang, search), newtab:false});
-      if (isSupported('forvo', lang)) tabs.push({ name: 'Forvo', href:getForvoLink(lang, search), newtab:false});
+      if (isSupported('rhinospike', lang)) tabs.push({ name: 'RhinoSpike', href:getRhinoSpikeLink(lang, search), newtab:true});
+      if (isSupported('forvo', lang)) tabs.push({ name: 'Forvo', href:getForvoLink(lang, search), newtab:true});
       return tabs;
     };
 
